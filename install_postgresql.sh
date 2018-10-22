@@ -33,7 +33,7 @@ ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D ${PGDATA}
  
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/postgresql-9.6.service
-sudo apt-get install systemd
+yes Y | sudo apt-get install systemd
 sudo systemctl daemon-reload
 sudo systemctl enable postgresql-9.6
 sudo echo "listen_addresses = '*'          # what IP address(es) to listen on; 
