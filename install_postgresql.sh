@@ -3,7 +3,7 @@ sudo apt-get update
 # #install the necessary tools 
 # sudo apt-get install gcc make libreadline6-dev zlib1g-dev -y
 #download postgresql source code
-mkdir -p /apps/postgres
+sudo mkdir -p /apps/postgres
 wget https://get.enterprisedb.com/postgresql/postgresql-9.6.3-1-linux-x64-binaries.tar.gz
 tar -zxvf postgresql-9.6.3-1-linux-x64-binaries.tar.gz -C /apps/postgres
 #manual postgresql deployment
@@ -33,7 +33,7 @@ ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D ${PGDATA}
  
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/postgresql-9.6.service
-sudo apt-get reinstall systemd
+sudo apt-get install systemd
 sudo systemctl daemon-reload
 sudo systemctl enable postgresql-9.6
 sudo echo "listen_addresses = '*'          # what IP address(es) to listen on; 
