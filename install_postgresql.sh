@@ -3,9 +3,7 @@ sudo apt-get update
 #install the necessary tools 
 sudo apt-get install gcc make libreadline6-dev zlib1g-dev -y
 #download postgresql source code
-mkdir -p /apps/postgres
-mkdir -p /apps/postgres12
-
+sudo mkdir -p /apps/postgres
 wget https://get.enterprisedb.com/postgresql/postgresql-9.6.3-1-linux-x64-binaries.tar.gz
 tar -zxvf postgresql-9.6.3-1-linux-x64-binaries.tar.gz -C /apps/postgres
 #manual postgresql deployment
