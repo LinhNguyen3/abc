@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt-get update 
-# #install the necessary tools 
-# sudo apt-get install gcc make libreadline6-dev zlib1g-dev -y
+#install the necessary tools 
+sudo apt-get install gcc make libreadline6-dev zlib1g-dev -y
 #download postgresql source code
 sudo mkdir -p /apps/postgres
 curl -O https://get.enterprisedb.com/postgresql/postgresql-9.6.3-1-linux-x64-binaries.tar.gz
