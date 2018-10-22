@@ -36,8 +36,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/postgresql-9.6.service
 yes Y | sudo apt-get install systemd
 sudo systemctl daemon-reload
 sudo systemctl enable postgresql-9.6
-sudo echo "listen_addresses = '*'          # what IP address(es) to listen on; 
-port = 5432                             # (change requires restart) 
+sudo echo "listen_addresses = '*'          
+port = 5432                             
 tcp_keepalives_idle = 200 
 tcp_keepalives_interval = 200 
 tcp_keepalives_count = 5 
