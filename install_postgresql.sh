@@ -11,6 +11,8 @@ sudo mkdir -p /k8s-data-mt/fme-dbms
 sudo useradd -M -s /bin/false postgres
 sudo chown -R postgres:postgres /k8s-data-mt/fme-dbms/
 sudo mkdir /k8s-data-mt/fme-dbms-log
+sudo chown -R postgres:postgres /k8s-data-mt/fme-dbms-log/
+
 sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /k8s-data-mt/fme-dbms/
 sudo mkdir /apps/postgres/pgsql/log
 sudo echo "[Unit]
