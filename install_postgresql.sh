@@ -7,13 +7,12 @@ sudo mkdir -p /apps/postgres
 curl -O https://get.enterprisedb.com/postgresql/postgresql-9.6.3-1-linux-x64-binaries.tar.gz
 tar -zxvf postgresql-9.6.3-1-linux-x64-binaries.tar.gz -C /apps/postgres
 #manual postgresql deployment
-sudo mkdir -p /k8s-data-mt/fme-dbms
+sudo mkdir -p /var/lib/pgsql/data
 sudo useradd -M -s /bin/false postgres
-sudo chown -R postgres:postgres /k8s-data-mt/fme-dbms/
-sudo mkdir /k8s-data-mt/fme-dbms-log
-sudo chown -R postgres:postgres /k8s-data-mt/fme-dbms-log/
-
-sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /k8s-data-mt/fme-dbms/
+sudo chown -R postgres:postgres /var/lib/pgsql/data/
+sudo mkdir /var/lib/pgsql/data-log
+sudo chown -R postgres:postgres /var/lib/pgsql/data-log/
+sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /var/lib/pgsql/data/
 sudo mkdir /apps/postgres/pgsql/log
 sudo echo "[Unit]
 Description=PostgreSQL 9.6 database server
@@ -25,13 +24,13 @@ TimeoutSec=0
  
 User=postgres
  
-Environment=PGDATA=/k8s-data-mt/fme-dbms
+Environment=PGDATA=/var/lib/pgsql/data
 Environment=PIDFILE=/apps/postgres/9.6/data/postmaster.pid
-Environment=LOGFILE=/k8s-data-mt/fme-dbms-log/startup.log
+Environment=LOGFILE=/var/lib/pgsql/data-log/startup.log
  
-ExecStart=/apps/postgres/pgsql/bin/pg_ctl start -w -t 120 -D /k8s-data-mt/fme-dbms -l /k8s-data-mt/fme-dbms-log/startup.log
-ExecStop=/apps/postgres/pgsql/bin/pg_ctl stop -m fast -w -D /k8s-data-mt/fme-dbms
-ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D /k8s-data-mt/fme-dbms
+ExecStart=/apps/postgres/pgsql/bin/pg_ctl start -w -t 120 -D /var/lib/pgsql/data -l /var/lib/pgsql/data-log/startup.log
+ExecStop=/apps/postgres/pgsql/bin/pg_ctl stop -m fast -w -D /var/lib/pgsql/data
+ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D /var/lib/pgsql/data
  
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/postgresql-9.6.service
@@ -58,7 +57,7 @@ autovacuum = on
 log_autovacuum_min_duration = 0 
 autovacuum_max_workers = 1 
 autovacuum_naptime = 1min 
-autovacuum_vacuum_threshold = 50" > /k8s-data-mt/fme-dbms/postgres.conf
+autovacuum_vacuum_threshold = 50" > /var/lib/pgsql/data/postgres.conf
 sudo echo "# IPv4 local connections:
-host    all             all             0.0.0.0/0            trust" > /k8s-data-mt/fme-dbms/pg_hba.conf
+host    all             all             0.0.0.0/0            trust" > /var/lib/pgsql/data/pg_hba.conf
 sudo systemctl restart postgresql-9.6
