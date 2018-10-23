@@ -27,9 +27,9 @@ Environment=PGDATA=/k8s-data-mt/fme-dbms
 Environment=PIDFILE=/apps/postgres/9.6/data/postmaster.pid
 Environment=LOGFILE=/k8s-data-mt/fme-dbms-log/startup.log
  
-ExecStart=/apps/postgres/pgsql/bin/pg_ctl start -w -t 120 -D "${PGDATA}" -l "${LOGFILE}"
-ExecStop=/apps/postgres/pgsql/bin/pg_ctl stop -m fast -w -D "${PGDATA}"
-ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D ${PGDATA}
+ExecStart=/apps/postgres/pgsql/bin/pg_ctl start -w -t 120 -D /k8s-data-mt/fme-dbms -l /k8s-data-mt/fme-dbms-log/startup.log
+ExecStop=/apps/postgres/pgsql/bin/pg_ctl stop -m fast -w -D /k8s-data-mt/fme-dbms
+ExecReload=/apps/postgres/pgsql/bin/pg_ctl reload -D /k8s-data-mt/fme-dbms
  
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/postgresql-9.6.service
