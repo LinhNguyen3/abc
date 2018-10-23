@@ -12,17 +12,18 @@ sudo tar jxvf  postgresql-9.6.3.tar.bz2
 
 
 #manual postgresql deployment
-sudo mkdir -p /var/lib/pgsql/data
-sudo useradd -M -s /bin/false postgres
-sudo chown -R postgres:postgres /var/lib/pgsql/data/
-sudo mkdir /var/lib/pgsql/data-log
-sudo chown -R postgres:postgres /var/lib/pgsql/data-log/
-sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /var/lib/pgsql/data/
-sudo mkdir /apps/postgres/pgsql/log
+#sudo mkdir -p /var/lib/pgsql/data
+#sudo useradd -M -s /bin/false postgres
+#sudo chown -R postgres:postgres /var/lib/pgsql/data/
+#sudo mkdir /var/lib/pgsql/data-log
+#sudo chown -R postgres:postgres /var/lib/pgsql/data-log/
+#sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /var/lib/pgsql/data/
+#sudo mkdir /apps/postgres/pgsql/log
 
 #install postgressql 9.6.3
 cd postgresql-9.6.3
 ./configure --prefix=/opt/postgresql-9.6.3
+sudo useradd -M -s /bin/false postgres
 sudo mkdir -p /opt/pgsql_data
 sudo chown -R postgres.postgres /opt/pgsql_data
 
