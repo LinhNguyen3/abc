@@ -6,8 +6,9 @@ sudo apt-get install gcc make libreadline6-dev zlib1g-dev -y
 
 #download postgresql source code
 sudo mkdir -p /apps/postgres
-curl -O https://get.enterprisedb.com/postgresql/postgresql-9.6.3-1-linux-x64-binaries.tar.gz
-tar -zxvf postgresql-9.6.3-1-linux-x64-binaries.tar.gz -C /apps/postgres
+sudo wget https://ftp.postgresql.org/pub/source/v9.6.3/postgresql-9.6.3.tar.bz2 -P /apps/postgres
+cd /apps/postgres
+sudo tar jxvf  postgresql-9.6.3.tar.bz2
 
 
 #manual postgresql deployment
@@ -18,6 +19,12 @@ sudo mkdir /var/lib/pgsql/data-log
 sudo chown -R postgres:postgres /var/lib/pgsql/data-log/
 sudo -u postgres /apps/postgres/pgsql/bin/initdb -D /var/lib/pgsql/data/
 sudo mkdir /apps/postgres/pgsql/log
+
+#install postgressql 9.6.3
+cd postgresql-9.6.3
+./configure --prefix=/opt/postgresql-9.6.3
+sudo mkdir -p /opt/pgsql_data
+sudo chown -R postgres.postgres /opt/pgsql_data
 
 #setup postgresql-9.6.service
 sudo echo "[Unit]
